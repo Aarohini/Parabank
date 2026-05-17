@@ -1,0 +1,27 @@
+[
+  {
+    "testName": "Validate GET Account API - Valid Account",
+
+    "accountId": 13566,
+
+    "expectedStatus": 200,
+
+    "expectedType": "CHECKING"
+  },
+
+  {
+    "testName": "Validate GET Account API - Invalid Account",
+
+    "accountId": 99999,
+
+    "expectedStatus": 400
+  },
+
+  {
+    "testName": "Validate GET Account API - Missing Account ID",
+
+    "accountId": "",
+
+    "expectedStatus": 404
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "testName": "Valid CREATE Account API",
+    "customerId": 12434,
+    "newAccountType": 0,
+    "fromAccountId": 13566,
+    "expectedStatus": 200,
+    "expectedType": "CHECKING"
+  },
+
+  {
+    "testName": "Invalid Customer ID",
+
+    "customerId": 999999,
+
+    "newAccountType": 0,
+
+    "fromAccountId": 20115,
+
+    "expectedStatus": 400
+  },
+
+  {
+    "testName": "Invalid From Account ID",
+
+    "customerId": 15320,
+
+    "newAccountType": 0,
+
+    "fromAccountId": 999999,
+
+    "expectedStatus": 400
+  }
+]
