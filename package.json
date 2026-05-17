@@ -3,13 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:ui-tests": "playwright test tests/ui.spec.ts",
+    "test:api-tests": "playwright test tests/api.spec.ts",
+    "test:e2e-tests": "playwright test tests/e2e.spec.ts",
+    "report:html": "playwright show-report html-report",
+    "report:allure": "allure generate allure-results --clean -o allure-report && allure open allure-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.8.0"
+    "@types/node": "^25.8.0",
+    "allure-playwright": "^3.8.0"
   }
 }

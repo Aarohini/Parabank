@@ -1,6 +1,6 @@
 ﻿import * as fs from 'fs';
 import * as path from 'path';
-import { randomUUID } from 'crypto';
+
 
 interface BaseUserData {
     firstName: string;
@@ -37,7 +37,6 @@ function generateUniqueUsername(suffix: string): string {
     const sanitized = raw.replace(/[^a-zA-Z0-9]/g, '');
     return sanitized.slice(0, 15);
 }
-
 function generateRandomPhoneNumber(): string {
     return `98${Math.floor(100000000 + Math.random() * 900000000)}`;
 }

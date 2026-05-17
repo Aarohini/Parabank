@@ -18,8 +18,23 @@ export default defineConfig({
 
         screenshot: 'on',
 
-        video: 'on',
+        video: 'retain-on-failure',
 
-        trace: 'on'
-    }
+        trace: 'retain-on-failure'
+    },
+
+    reporter: [
+        ['html', { 
+            outputFolder: 'html-report', 
+            open: 'never',
+            attachmentsBaseURL: 'test-results/'
+        }],
+        ['allure-playwright', { 
+            outputFolder: 'allure-results',
+            attachmentsBaseURL: 'test-results/'
+        }],
+        ['list']
+    ],
+
+    webServer: undefined
 });

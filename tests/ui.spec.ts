@@ -10,7 +10,7 @@ import { getTestScenarios, UserRegistrationScenario } from '../utils/testDataUti
 
 test.describe('ParaBank UI Automation', () => {
     const testCases: UserRegistrationScenario[] = getTestScenarios();
-
+ 
     for (const scenario of testCases) {
         test(scenario.description, async ({ page }) => {
             const loginPage = new LoginPage(page);

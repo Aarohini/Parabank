@@ -17,7 +17,8 @@ export class LoginPage {
 
     async navigateToHomePage() {
 
-        await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
+        // await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
+        await this.page.goto('http://localhost:9090/parabank/index.htm');
     }
 
     async login(username: string, password: string) {
