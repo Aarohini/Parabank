@@ -1,0 +1,6 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-NEG-API-01: Validate GET Account API - Missing Account ID
+[INFO] Sending GET Request for Account ID: 
+[API] GET /accounts/
+[INFO] Response Body: 
+[SUCCESS] Status Code Validated: 404

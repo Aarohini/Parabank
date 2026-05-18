@@ -1,0 +1,140 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api.spec.ts >> Accounts API Tests >> TC-API-01, TC-API-04, TC-API-05 & TC-API-06: Valid GET Account API, validate schema and account type, balance
+- Location: tests\api.spec.ts:28:13
+
+# Error details
+
+```
+Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: "<type>CHECKING</type>"
+Received string:    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><account><id>13566</id><customerId>12434</customerId><type>SAVINGS</type><balance>-400.00</balance></account>"
+```
+
+# Test source
+
+```ts
+  1   | import { APIResponse } from '@playwright/test';
+  2   | import { test, expect } from '../fixtures/apiFixture';
+  3   | import { AccountsAPI } from '../pages/AccountsAPI';
+  4   | import { Assert } from '../utils/Assert';
+  5   | import apiGETData from '../test-data/getAPI.json';
+  6   | import apiPOSTData from '../test-data/createAPI.json';
+  7   | import { XMLParser } from 'fast-xml-parser';
+  8   | import Ajv from 'ajv';
+  9   | import { accountSchema } from '../utils/schema';
+  10  | 
+  11  | const ajv = new Ajv();
+  12  | const parser = new XMLParser();
+  13  | 
+  14  | test.describe('Accounts API Tests', () => {
+  15  | 
+  16  |     let accountsAPI: AccountsAPI;
+  17  | 
+  18  |     let response: APIResponse;
+  19  | 
+  20  |     test.beforeEach(async ({ apiContext }) => {
+  21  | 
+  22  |         accountsAPI = new AccountsAPI(apiContext);
+  23  | 
+  24  |     });
+  25  | 
+  26  |     for (const apiData of apiGETData) {
+  27  | 
+  28  |         test(apiData.testName, async () => {
+  29  | 
+  30  |             const accountId = apiData.accountId as number;
+  31  |             response = await accountsAPI.getAccount(accountId);
+  32  | 
+  33  |             const responseText = await response.text();
+  34  | 
+  35  |             console.log(responseText);
+  36  | 
+  37  |             Assert.verifyStatusCode(response, apiData.expectedStatus);
+  38  | 
+  39  |             if (apiData.expectedStatus === 200) {
+  40  |                 if (apiData.accountId !== undefined && apiData.accountId !== '') {
+  41  |                     expect(responseText).toContain(
+  42  |                         `<id>${apiData.accountId}</id>`
+  43  |                     );
+  44  |                 }
+  45  |                 console.log(responseText);
+  46  |                 if (apiData.expectedType) {
+> 47  |                     expect(responseText).toContain(
+      |                                          ^ Error: expect(received).toContain(expected) // indexOf
+  48  |                         `<type>${apiData.expectedType}</type>`
+  49  |                     );
+  50  |                 }
+  51  |                 //schema validation of the get response
+  52  |                 const jsonData = parser.parse(responseText);
+  53  | 
+  54  |                 const validate = ajv.compile(accountSchema);
+  55  | 
+  56  |                 const isValid = validate(jsonData);
+  57  | 
+  58  |                 expect(isValid).toBeTruthy();
+  59  |                 // TC-API-06: Validate GET Account API - Balance
+  60  | 
+  61  |                 expect(jsonData.account.balance).not.toBeNull();
+  62  | 
+  63  |                 expect(Number(jsonData.account.balance)).not.toBeNaN();
+  64  |             }
+  65  | 
+  66  |         });
+  67  | 
+  68  |     }
+  69  | 
+  70  |     for (const apiData of apiPOSTData) {
+  71  | 
+  72  |         test(`${apiData.testName}`, async () => {
+  73  | 
+  74  |             response = await accountsAPI.createAccount(
+  75  | 
+  76  |                 apiData.customerId,
+  77  | 
+  78  |                 apiData.newAccountType,
+  79  | 
+  80  |                 apiData.fromAccountId
+  81  | 
+  82  |             );
+  83  | 
+  84  |             const responseText = await response.text();
+  85  | 
+  86  |             console.log(responseText);
+  87  | 
+  88  |             Assert.verifyStatusCode(
+  89  |                 response,
+  90  |                 apiData.expectedStatus
+  91  |             );
+  92  | 
+  93  |             if (apiData.expectedStatus === 200) {
+  94  |                 expect(responseText).toContain('<account>');
+  95  | 
+  96  |                 if (apiData.expectedType) {
+  97  |                     expect(responseText).toContain(
+  98  |                         `<type>${apiData.expectedType}</type>`
+  99  |                     );
+  100 |                 }
+  101 |                 //schema validation of the create response
+  102 |                 const jsonData = parser.parse(responseText);
+  103 | 
+  104 |                 const validate = ajv.compile(accountSchema);
+  105 | 
+  106 |                 const isValid = validate(jsonData);
+  107 | 
+  108 |                 expect(isValid).toBeTruthy();
+  109 |             }
+  110 | 
+  111 |         });
+  112 | 
+  113 |     }
+  114 | 
+  115 | });
+```

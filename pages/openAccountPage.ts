@@ -29,7 +29,7 @@ export class OpenAccountPage {
 
         await this.page.selectOption(this.accountTypeDropdown, '0');
 
-        // Select the first available existing account for transfer
+
         await this.page.selectOption(this.existingAccountDropdown, { index: 0 });
 
         await this.page.click(this.openAccountButton);

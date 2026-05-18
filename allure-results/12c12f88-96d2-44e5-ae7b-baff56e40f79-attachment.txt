@@ -1,0 +1,6 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-API-02: Validate GET Account API - Invalid Account
+[INFO] Sending GET Request for Account ID: 99999
+[API] GET /accounts/99999
+[INFO] Response Body: Could not find account #99999
+[SUCCESS] Status Code Validated: 400

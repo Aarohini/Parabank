@@ -1,0 +1,3 @@
+[API] POST /createAccount
+[INFO] Customer ID: 12434
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><account><id>13899</id><customerId>12434</customerId><type>CHECKING</type><balance>0</balance></account>

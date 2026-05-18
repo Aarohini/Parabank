@@ -1,0 +1,39 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api.spec.ts >> Accounts API Tests >> TC-NEG-API-03: Invalid From Account ID
+- Location: tests\api.spec.ts:152:13
+
+# Error details
+
+```
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 400
+Received: 429
+```
+
+# Test source
+
+```ts
+  1  | import { expect, APIResponse } from '@playwright/test';
+  2  | 
+  3  | export class Assert {
+  4  | 
+  5  |     static verifyStatusCode(
+  6  |         response: APIResponse,
+  7  |         expectedStatus: number
+  8  |     ) {
+  9  | 
+> 10 |         expect(response.status()).toBe(expectedStatus);
+     |                                   ^ Error: expect(received).toBe(expected) // Object.is equality
+  11 | 
+  12 |     }
+  13 | 
+  14 | }
+```

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><account><id>23223</id><customerId>12434</customerId><type>CHECKING</type><balance>0</balance></account>

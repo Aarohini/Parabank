@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
 
@@ -6,7 +6,7 @@ export default defineConfig({
 
     timeout: 60000,
 
-    fullyParallel: false,
+    fullyParallel: true,
 
     workers: 1,
 
@@ -14,27 +14,70 @@ export default defineConfig({
 
         headless: false,
 
-        browserName: 'chromium',
-
         screenshot: 'on',
 
         video: 'retain-on-failure',
 
         trace: 'retain-on-failure'
+
     },
 
+    projects: [
+
+        {
+            name: 'Chromium',
+
+            use: {
+
+                ...devices['Desktop Chrome'],
+
+                browserName: 'chromium'
+
+            }
+
+        },
+
+        {
+            name: 'WebKit',
+
+            use: {
+
+                ...devices['Desktop Safari'],
+
+                browserName: 'webkit'
+
+            }
+
+        }
+
+    ],
+
     reporter: [
-        ['html', { 
-            outputFolder: 'html-report', 
-            open: 'never',
-            attachmentsBaseURL: 'test-results/'
-        }],
-        ['allure-playwright', { 
-            outputFolder: 'allure-results',
-            attachmentsBaseURL: 'test-results/'
-        }],
+
+        [
+            'html',
+            {
+                outputFolder: 'html-report',
+
+                open: 'never',
+
+                attachmentsBaseURL: 'test-results/'
+            }
+        ],
+
+        [
+            'allure-playwright',
+            {
+                outputFolder: 'allure-results',
+
+                attachmentsBaseURL: 'test-results/'
+            }
+        ],
+
         ['list']
+
     ],
 
     webServer: undefined
+
 });

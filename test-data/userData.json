@@ -1,7 +1,7 @@
 [
   {
     "name": "valid-registration",
-    "description": "Valid registration, login and open account",
+    "description": "TC-AC-UI-01: Valid registration, login and open account",
     "usernameSuffix": "valid",
     "firstName": "Aarohini",
     "lastName": "NA",
@@ -18,7 +18,7 @@
   },
   {
     "name": "mismatched-passwords",
-    "description": "Mismatched passwords shows validation error",
+    "description": "TC-NEG-02: Mismatched passwords shows validation error",
     "usernameSuffix": "mismatch",
     "firstName": "Aarohini",
     "lastName": "NA",
@@ -36,7 +36,7 @@
   },
   {
     "name": "missing-required-field",
-    "description": "Missing first name shows validation error",
+    "description": "TC-AC-UI-02: Missing first name shows validation error",
     "usernameSuffix": "noFirstName",
     "lastName": "NA",
     "address": "Haldia Institute of Technology",
@@ -51,5 +51,35 @@
     "missingFields": ["firstName"],
     "expectSuccess": false,
     "expectedError": "First name is required"
-  }
+  },
+  {
+  "name": "all-fields-blank",
+  "description": "TC-NEG-03: Verify registration fails when all mandatory fields are blank",
+  "usernameSuffix": "blankFields",
+  "firstName": "",
+  "lastName": "",
+  "address": "",
+  "city": "",
+  "state": "",
+  "zipCode": "",
+  "phoneNumber": "",
+  "ssn": "",
+  "username": "",
+  "password": "",
+  "confirmPassword": "",
+  "missingFields": [
+    "firstName",
+    "lastName",
+    "address",
+    "city",
+    "state",
+    "zipCode",
+    "ssn",
+    "username",
+    "password",
+    "confirmPassword"
+  ],
+  "expectSuccess": false,
+  "expectedError": "First name is required"
+}
 ]

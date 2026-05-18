@@ -1,0 +1,7 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-NEG-API-02: Invalid Customer ID
+[INFO] Sending CREATE Account Request for Customer ID: 999999
+[API] POST /createAccount
+[INFO] Customer ID: 999999
+[INFO] Response Body: Could not create new account for customer 999999 from account 20115
+[SUCCESS] Status Code Validated: 400

@@ -1,0 +1,7 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-NEG-API-03: Invalid From Account ID
+[INFO] Sending CREATE Account Request for Customer ID: 15320
+[API] POST /createAccount
+[INFO] Customer ID: 15320
+[INFO] Response Body: Could not create new account for customer 15320 from account 999999
+[SUCCESS] Status Code Validated: 400

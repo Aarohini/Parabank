@@ -1,0 +1,4 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-API-01, TC-API-04, TC-API-05 & TC-API-06: Valid GET Account API, validate schema and account type, balance
+[INFO] Sending GET Request for Account ID: 13566
+[API] GET /accounts/13566
