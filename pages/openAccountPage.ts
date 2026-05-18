@@ -20,6 +20,8 @@ export class OpenAccountPage {
 
     newAccountNumber = '#newAccountId';
 
+    
+
     async navigateToOpenAccountPage() {
 
         await this.page.click(this.openNewAccountLink);

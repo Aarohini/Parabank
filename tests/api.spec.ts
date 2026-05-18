@@ -58,7 +58,6 @@ test.describe('Accounts API Tests', () => {
                 `Response Body: ${responseText}`
             );
 
-            // Status Code Validation
 
             Assert.verifyStatusCode(
                 response,
@@ -69,11 +68,11 @@ test.describe('Accounts API Tests', () => {
                 `Status Code Validated: ${apiData.expectedStatus}`
             );
 
-            // Positive Validations
+
 
             if (apiData.expectedStatus === 200) {
 
-                // Account ID Validation
+
 
                 if (
                     apiData.accountId !== undefined &&
@@ -90,7 +89,7 @@ test.describe('Accounts API Tests', () => {
 
                 }
 
-                // Account Type Validation
+
 
                 if (apiData.expectedType) {
 
@@ -104,7 +103,6 @@ test.describe('Accounts API Tests', () => {
 
                 }
 
-                // Schema Validation
 
                 const jsonData = parser.parse(responseText);
 
@@ -118,7 +116,6 @@ test.describe('Accounts API Tests', () => {
                     'Schema Validation Passed'
                 );
 
-                // TC-API-06:Balance Validation
 
                 expect(
                     jsonData.account.balance
@@ -166,7 +163,6 @@ test.describe('Accounts API Tests', () => {
                 `Response Body: ${responseText}`
             );
 
-            // Status Code Validation
 
             Assert.verifyStatusCode(
                 response,
@@ -177,7 +173,6 @@ test.describe('Accounts API Tests', () => {
                 `Status Code Validated: ${apiData.expectedStatus}`
             );
 
-            // Positive Validations
 
             if (apiData.expectedStatus === 200) {
 
@@ -189,7 +184,6 @@ test.describe('Accounts API Tests', () => {
                     'Account Creation Validation Passed'
                 );
 
-                // Account Type Validation
 
                 if (apiData.expectedType) {
 
@@ -203,7 +197,6 @@ test.describe('Accounts API Tests', () => {
 
                 }
 
-                // Schema Validation
 
                 const jsonData = parser.parse(responseText);
 

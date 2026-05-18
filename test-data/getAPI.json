@@ -1,19 +1,19 @@
 [
   {
-    "testName": "TC-API-01, TC-API-04, TC-API-05 & TC-API-06: Valid GET Account API, validate schema and account type, balance",
+    "testName": "TC-API-01, TC-API-04, TC-API-05 & TC-API-06: @api Valid GET Account API, validate schema and account type, balance",
     "accountId": 13566,
     "expectedStatus": 200,
     "expectedType": "CHECKING"
   },
 
   {
-    "testName": "TC-API-02: Validate GET Account API - Invalid Account",
+    "testName": "TC-API-02: @api Validate GET Account API - Invalid Account",
     "accountId": 99999,
     "expectedStatus": 400
   },
 
   {
-    "testName": "TC-NEG-API-01: Validate GET Account API - Missing Account ID",
+    "testName": "TC-NEG-API-01: @api Validate GET Account API - Missing Account ID",
     "accountId": "",
     "expectedStatus": 404
   }

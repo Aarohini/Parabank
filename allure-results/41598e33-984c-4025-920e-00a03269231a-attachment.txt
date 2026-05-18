@@ -1,0 +1,2 @@
+[API] GET /accounts/28662
+✓ Account verified: UI account ID (28662) matches API response

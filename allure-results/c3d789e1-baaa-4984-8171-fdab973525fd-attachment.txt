@@ -1,0 +1,6 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-API-03 & TC-API-05: Valid CREATE Account API and check response schema
+[INFO] Sending CREATE Account Request for Customer ID: 12434
+[API] POST /createAccount
+[INFO] Customer ID: 12434
+[INFO] Response Body: Could not create new account for customer 12434 from account 13566

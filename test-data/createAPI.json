@@ -1,6 +1,6 @@
 [
   {
-    "testName": "TC-API-03 & TC-API-05: Valid CREATE Account API and check response schema",
+    "testName": "TC-API-03 & TC-API-05: @api Valid CREATE Account API and check response schema",
     "customerId": 12434,
     "newAccountType": 0,
     "fromAccountId": 13566,
@@ -9,7 +9,7 @@
   },
 
   {
-    "testName": "TC-NEG-API-02: Invalid Customer ID",
+    "testName": "TC-NEG-API-02: @api Invalid Customer ID",
     "customerId": 999999,
     "newAccountType": 0,
     "fromAccountId": 20115,
@@ -17,7 +17,7 @@
   },
 
   {
-    "testName": "TC-NEG-API-03: Invalid From Account ID",
+    "testName": "TC-NEG-API-03: @api Invalid From Account ID",
     "customerId": 15320,
     "newAccountType": 0,
     "fromAccountId": 999999,
