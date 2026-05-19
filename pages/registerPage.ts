@@ -1,52 +1,166 @@
-import { Page } from '@playwright/test';
+import {
+    Page,
+    Locator,
+    expect
+} from '@playwright/test';
 
 export class RegisterPage {
 
     readonly page: Page;
 
+    // Locators
+
+    readonly firstName: Locator;
+
+    readonly lastName: Locator;
+
+    readonly address: Locator;
+
+    readonly city: Locator;
+
+    readonly state: Locator;
+
+    readonly zipCode: Locator;
+
+    readonly phoneNumber: Locator;
+
+    readonly ssn: Locator;
+
+    readonly username: Locator;
+
+    readonly password: Locator;
+
+    readonly confirmPassword: Locator;
+
+    readonly registerButton: Locator;
+
+    readonly registrationSuccessMessage: Locator;
+
+    readonly signupHeading: Locator;
+
     constructor(page: Page) {
+
         this.page = page;
+
+        // this.firstName = page.getByLabel("First Name");
+         this.firstName = page.getByRole('textbox').nth(2)
+        this.lastName =
+            page.locator('#customer\\.lastName');
+
+        this.address =
+            page.locator('#customer\\.address\\.street');
+
+        this.city =
+            page.locator('#customer\\.address\\.city');
+
+        this.state =
+            page.locator('#customer\\.address\\.state');
+
+        this.zipCode =
+            page.locator('#customer\\.address\\.zipCode');
+
+        this.phoneNumber =
+            page.locator('#customer\\.phoneNumber');
+
+        this.ssn =
+            page.locator('#customer\\.ssn');
+
+        this.username =
+            page.locator('#customer\\.username');
+
+        this.password =
+            page.locator('#customer\\.password');
+
+        this.confirmPassword =
+            page.locator('#repeatedPassword');
+
+        this.registerButton =
+            page.getByRole('button', {
+                name: 'Register'
+            });
+
+        this.registrationSuccessMessage =
+            page.getByText(
+                'Your account was created successfully. You are now logged in.'
+            );
+
+        this.signupHeading =
+            page.getByRole('heading', {
+                name: 'Signing up is easy!'
+            });
     }
 
-    firstName = '#customer\\.firstName';
-    lastName = '#customer\\.lastName';
-    address = '#customer\\.address\\.street';
-    city = '#customer\\.address\\.city';
-    state = '#customer\\.address\\.state';
-    zipCode = '#customer\\.address\\.zipCode';
-    phoneNumber = '#customer\\.phoneNumber';
-    ssn = '#customer\\.ssn';
-    username = '#customer\\.username';
-    password = '#customer\\.password';
-    confirmPassword = '#repeatedPassword';
-    registerButton = 'input[value="Register"]';
-
-    
     async registerUser(userData: any) {
+
         const fields = [
-            { key: 'firstName', selector: this.firstName },
-            { key: 'lastName', selector: this.lastName },
-            { key: 'address', selector: this.address },
-            { key: 'city', selector: this.city },
-            { key: 'state', selector: this.state },
-            { key: 'zipCode', selector: this.zipCode },
-            { key: 'phoneNumber', selector: this.phoneNumber },
-            { key: 'ssn', selector: this.ssn },
-            { key: 'username', selector: this.username },
-            { key: 'password', selector: this.password }
+
+            { key: 'firstName', locator: this.firstName },
+
+            { key: 'lastName', locator: this.lastName },
+
+            { key: 'address', locator: this.address },
+
+            { key: 'city', locator: this.city },
+
+            { key: 'state', locator: this.state },
+
+            { key: 'zipCode', locator: this.zipCode },
+
+            { key: 'phoneNumber', locator: this.phoneNumber },
+
+            { key: 'ssn', locator: this.ssn },
+
+            { key: 'username', locator: this.username },
+
+            { key: 'password', locator: this.password }
         ];
 
         for (const field of fields) {
+
             if (userData[field.key] !== undefined) {
-                await this.page.locator(field.selector).fill(userData[field.key]);
+
+                await field.locator.fill(
+                    userData[field.key]
+                );
             }
         }
 
-        const confirmValue = userData.confirmPassword ?? userData.password;
+        const confirmValue =
+
+            userData.confirmPassword ??
+
+            userData.password;
+
         if (confirmValue !== undefined) {
-            await this.page.locator(this.confirmPassword).fill(confirmValue);
+
+            await this.confirmPassword.fill(
+                confirmValue
+            );
         }
 
-        await this.page.locator(this.registerButton).click();
+        await this.registerButton.click();
+    }
+
+    async verifySuccessfulRegistration() {
+
+        await expect(
+            this.registrationSuccessMessage
+        ).toBeVisible();
+    }
+
+    async verifyRegistrationFailed() {
+
+        await expect(
+            this.signupHeading
+        ).toBeVisible();
+    }
+
+    async verifyErrorMessage(
+        errorMessage: string
+    ) {
+
+        await expect(
+            this.page.getByText(errorMessage)
+        ).toBeVisible();
     }
 }

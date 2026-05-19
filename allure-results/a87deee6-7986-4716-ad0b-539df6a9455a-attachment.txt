@@ -1,0 +1,10 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-API-03 & TC-API-05: @api Valid CREATE Account API and check response schema
+[INFO] Sending CREATE Account Request for Customer ID: 12434
+[API] POST /createAccount
+[INFO] Customer ID: 12434
+[INFO] Response Body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?><account><id>17340</id><customerId>12434</customerId><type>CHECKING</type><balance>0</balance></account>
+[SUCCESS] Status Code Validated: 200
+[SUCCESS] Account Creation Validation Passed
+[SUCCESS] Account Type Validation Passed
+[SUCCESS] Schema Validation Passed

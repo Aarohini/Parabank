@@ -1,51 +1,84 @@
-import { Page } from '@playwright/test';
+import {Page,Locator,expect} from '@playwright/test';
 
 export class OpenAccountPage {
 
     readonly page: Page;
 
+
+
+    readonly openNewAccountLink: Locator;
+    readonly accountTypeDropdown: Locator;
+    readonly existingAccountDropdown: Locator;
+    readonly openAccountButton: Locator;
+    readonly accountOpenedMessage: Locator;
+    readonly newAccountNumber: Locator;
+
     constructor(page: Page) {
+
         this.page = page;
+
+        this.openNewAccountLink = page.getByRole('link', {name: 'Open New Account'});
+
+        this.accountTypeDropdown = page.locator('#type');
+
+        this.existingAccountDropdown = page.locator('#fromAccountId');
+
+        this.openAccountButton = page.getByRole('button', { name: 'Open New Account' });
+
+        this.accountOpenedMessage = page.getByText('Account Opened!');
+
+        this.newAccountNumber = page.locator('#newAccountId');
     }
-
-    openNewAccountLink = 'text=Open New Account';
-
-    accountTypeDropdown = '#type';
-
-    existingAccountDropdown = '#fromAccountId';
-
-    openAccountButton = 'input[value="Open New Account"]';
-
-    accountOpenedMessage = 'text=Account Opened!';
-
-    newAccountNumber = '#newAccountId';
-
-    
 
     async navigateToOpenAccountPage() {
 
-        await this.page.click(this.openNewAccountLink);
+        await this.openNewAccountLink.click();
     }
 
     async createCheckingAccount() {
 
-        await this.page.selectOption(this.accountTypeDropdown, '0');
+        // Select Checking Account
 
+        await this.accountTypeDropdown
+            .selectOption('0');
 
-        await this.page.selectOption(this.existingAccountDropdown, { index: 0 });
+        // Select Existing Account
 
-        await this.page.click(this.openAccountButton);
+        await this.existingAccountDropdown
+            .selectOption({ index: 0 });
+
+        // Open Account
+
+        await this.openAccountButton.click();
     }
 
     async createSavingsAccount() {
 
-        await this.page.selectOption(this.accountTypeDropdown, '1');
+        // Select Savings Account
 
-        await this.page.click(this.openAccountButton);
+        await this.accountTypeDropdown
+            .selectOption('1');
+
+        // Select Existing Account
+
+        await this.existingAccountDropdown
+            .selectOption({ index: 0 });
+
+        // Open Account
+
+        await this.openAccountButton.click();
+    }
+
+    async verifyAccountOpened() {
+
+        await expect(
+            this.accountOpenedMessage
+        ).toBeVisible();
     }
 
     async getNewAccountNumber() {
 
-        return await this.page.textContent(this.newAccountNumber);
+        return await this.newAccountNumber
+            .textContent();
     }
 }

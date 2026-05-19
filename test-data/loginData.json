@@ -1,0 +1,16 @@
+[
+
+  {
+    "description": "TC-LOGIN-02 Verify Login with Invalid Password",
+    "username": "validUser",
+    "password": "wrongPass",
+    "expectSuccess": false,
+    "expectedError": "The username and password could not be verified."
+  },
+  {
+    "description": "TC-LOGIN-03 Verify Blank Username and Password",
+    "username": "",
+    "password": "",
+    "expectSuccess": false
+  }
+]

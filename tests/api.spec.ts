@@ -1,31 +1,20 @@
 import { APIResponse } from '@playwright/test';
-
 import { test, expect } from '../fixtures/apiFixture';
-
 import { AccountsAPI } from '../pages/AccountsAPI';
-
 import { Assert } from '../utils/Assert';
-
 import apiGETData from '../test-data/getAPI.json';
-
 import apiPOSTData from '../test-data/createAPI.json';
-
 import { XMLParser } from 'fast-xml-parser';
-
 import Ajv from 'ajv';
-
 import { accountSchema } from '../utils/schema';
-
 import { Logger } from '../utils/logger';
 
 const ajv = new Ajv();
-
 const parser = new XMLParser();
 
 test.describe('Accounts API Tests', () => {
 
     let accountsAPI: AccountsAPI;
-
     let response: APIResponse;
 
     test.beforeEach(async ({ apiContext }) => {
@@ -40,33 +29,19 @@ test.describe('Accounts API Tests', () => {
 
         test(apiData.testName, async () => {
 
-            Logger.info(
-                `Executing Testcase: ${apiData.testName}`
-            );
-
+            Logger.info(`Executing Testcase: ${apiData.testName}`);
             const accountId = apiData.accountId as number;
 
-            Logger.info(
-                `Sending GET Request for Account ID: ${accountId}`
-            );
-
+            Logger.info(`Sending GET Request for Account ID: ${accountId}`);
             response = await accountsAPI.getAccount(accountId);
 
             const responseText = await response.text();
-
-            Logger.info(
-                `Response Body: ${responseText}`
-            );
+            Logger.info(`Response Body: ${responseText}`);
 
 
-            Assert.verifyStatusCode(
-                response,
-                apiData.expectedStatus
-            );
+            Assert.verifyStatusCode(response,apiData.expectedStatus);
 
-            Logger.success(
-                `Status Code Validated: ${apiData.expectedStatus}`
-            );
+            Logger.success(`Status Code Validated: ${apiData.expectedStatus}`);
 
 
 
@@ -83,9 +58,7 @@ test.describe('Accounts API Tests', () => {
                         `<id>${apiData.accountId}</id>`
                     );
 
-                    Logger.success(
-                        'Account ID Validation Passed'
-                    );
+                    Logger.success('Account ID Validation Passed');
 
                 }
 
@@ -97,37 +70,23 @@ test.describe('Accounts API Tests', () => {
                         `<type>${apiData.expectedType}</type>`
                     );
 
-                    Logger.success(
-                        'Account Type Validation Passed'
-                    );
+                    Logger.success('Account Type Validation Passed');
 
                 }
 
 
                 const jsonData = parser.parse(responseText);
-
                 const validate = ajv.compile(accountSchema);
-
                 const isValid = validate(jsonData);
-
                 expect(isValid).toBeTruthy();
 
-                Logger.success(
-                    'Schema Validation Passed'
-                );
+                Logger.success('Schema Validation Passed');
 
+                //balance validations
+                expect(jsonData.account.balance).not.toBeNull();
+                expect(Number(jsonData.account.balance)).not.toBeNaN();
 
-                expect(
-                    jsonData.account.balance
-                ).not.toBeNull();
-
-                expect(
-                    Number(jsonData.account.balance)
-                ).not.toBeNaN();
-
-                Logger.success(
-                    'Balance Validation Passed'
-                );
+                Logger.success('Balance Validation Passed');
 
             }
 
@@ -139,39 +98,23 @@ test.describe('Accounts API Tests', () => {
 
         test(apiData.testName, async () => {
 
-            Logger.info(
-                `Executing Testcase: ${apiData.testName}`
-            );
+            Logger.info(`Executing Testcase: ${apiData.testName}`);
 
-            Logger.info(
-                `Sending CREATE Account Request for Customer ID: ${apiData.customerId}`
-            );
+            Logger.info(`Sending CREATE Account Request for Customer ID: ${apiData.customerId}`);
 
             response = await accountsAPI.createAccount(
-
                 apiData.customerId,
-
                 apiData.newAccountType,
-
                 apiData.fromAccountId
-
             );
 
             const responseText = await response.text();
 
-            Logger.info(
-                `Response Body: ${responseText}`
-            );
+            Logger.info(`Response Body: ${responseText}`);
 
 
-            Assert.verifyStatusCode(
-                response,
-                apiData.expectedStatus
-            );
-
-            Logger.success(
-                `Status Code Validated: ${apiData.expectedStatus}`
-            );
+            Assert.verifyStatusCode(response,apiData.expectedStatus);
+            Logger.success(`Status Code Validated: ${apiData.expectedStatus}`);
 
 
             if (apiData.expectedStatus === 200) {
@@ -180,9 +123,7 @@ test.describe('Accounts API Tests', () => {
                     '<account>'
                 );
 
-                Logger.success(
-                    'Account Creation Validation Passed'
-                );
+                Logger.success('Account Creation Validation Passed');
 
 
                 if (apiData.expectedType) {
@@ -191,24 +132,16 @@ test.describe('Accounts API Tests', () => {
                         `<type>${apiData.expectedType}</type>`
                     );
 
-                    Logger.success(
-                        'Account Type Validation Passed'
-                    );
+                    Logger.success('Account Type Validation Passed');
 
                 }
 
 
                 const jsonData = parser.parse(responseText);
-
                 const validate = ajv.compile(accountSchema);
-
                 const isValid = validate(jsonData);
-
                 expect(isValid).toBeTruthy();
-
-                Logger.success(
-                    'Schema Validation Passed'
-                );
+                Logger.success('Schema Validation Passed');
 
             }
 
