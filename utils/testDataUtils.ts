@@ -29,11 +29,11 @@ export interface RegistrationScenario {
 export interface UserRegistrationScenario extends BaseUserData, RegistrationScenario {}
 
 function generateUniqueUsername(suffix: string): string {
-    // Create a compact alphanumeric username to avoid UI/database truncation
+    //Create a compact alphanumeric username to avoid UI/database truncation
     const timeFragment = Date.now().toString(36).slice(-4); // recent time portion
-    const randFragment = Math.random().toString(36).slice(2, 8); // 6 chars
+    const randFragment = Math.random().toString(36).slice(2, 8); //6 chararcter
     const raw = `t${suffix}${timeFragment}${randFragment}`;
-    // Keep username to a reasonable length (max 15) and only alphanumeric
+    //Keep username to a reasonable length (max 15) and only alphanumeric
     const sanitized = raw.replace(/[^a-zA-Z0-9]/g, '');
     return sanitized.slice(0, 15);
 }

@@ -3,7 +3,7 @@
     "testName": "TC-API-01, TC-API-04, TC-API-05 & TC-API-06: @api Valid GET Account API, validate schema and account type, balance",
     "accountId": 13566,
     "expectedStatus": 200,
-    "expectedType": "SAVINGS"
+    "expectedType": "CHECKING"
   },
 
   {

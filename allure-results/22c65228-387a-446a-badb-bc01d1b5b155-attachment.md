@@ -1,0 +1,93 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: e2e.spec.ts >> TC-E2E-01: Validate New Account Created via UI Exists in API Response >> TC-E2E-01: Should register user, open account via UI, and verify account ID via API
+- Location: tests\e2e.spec.ts:12:9
+
+# Error details
+
+```
+Error: locator.click: Target page, context or browser has been closed
+Call log:
+  - waiting for getByRole('link', { name: 'Register' })
+
+```
+
+# Test source
+
+```ts
+  1  | import {Page,Locator,expect} from '@playwright/test';
+  2  | 
+  3  | export class LoginPage {
+  4  | 
+  5  |     readonly page: Page;
+  6  | 
+  7  |     //locators
+  8  |     readonly usernameInput: Locator;
+  9  |     readonly passwordInput: Locator;
+  10 |     readonly loginButton: Locator;
+  11 |     readonly registerLink: Locator;
+  12 |     readonly logoutLink: Locator;
+  13 |     readonly accountsOverviewHeading: Locator;
+  14 |     readonly loginErrorMessage: Locator;
+  15 | 
+  16 |     constructor(page: Page) {
+  17 | 
+  18 |         this.page = page;
+  19 |         this.usernameInput = page.locator('input[name="username"]');
+  20 |         this.passwordInput = page.locator('input[name="password"]');
+  21 |         this.loginButton = page.getByRole('button', {name: 'Log In'});
+  22 |         this.registerLink = page.getByRole('link', {name: 'Register'});
+  23 |         this.logoutLink = page.getByText('Log Out');
+  24 |         this.accountsOverviewHeading =page.getByRole('heading', {name: 'Accounts Overview'});
+  25 | 
+  26 |         //login failure message locator
+  27 |         this.loginErrorMessage = page.locator('#rightPanel p.error');
+  28 |     }
+  29 | 
+  30 |     async navigateToHomePage() {
+  31 | 
+  32 |         await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
+  33 |     }
+  34 | 
+  35 |     async login(
+  36 |         username: string,
+  37 |         password: string
+  38 |     ) {
+  39 | 
+  40 |         await this.usernameInput.fill(username);
+  41 | 
+  42 |         await this.passwordInput.fill(password);
+  43 | 
+  44 |         await this.loginButton.click();
+  45 |     }
+  46 | 
+  47 |     async clickRegisterLink() {
+> 48 |         await this.registerLink.click();
+     |                                 ^ Error: locator.click: Target page, context or browser has been closed
+  49 |     }
+  50 | 
+  51 |     async logout() {
+  52 |         await this.logoutLink.click();
+  53 |     }
+  54 | 
+  55 |     async verifySuccessfulLogin() {
+  56 |         await expect(this.accountsOverviewHeading).toBeVisible();
+  57 |     }
+  58 | 
+  59 |     async verifyLoginFailed() {
+  60 | 
+  61 |         await expect(this.accountsOverviewHeading).not.toBeVisible();
+  62 |     }
+  63 | 
+  64 |     async verifyLoginErrorMessage(errorMessage: string) {
+  65 | 
+  66 |         await expect(this.loginErrorMessage).toContainText(errorMessage);
+  67 |     }
+  68 | }
+```

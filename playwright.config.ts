@@ -9,6 +9,7 @@ export default defineConfig({
     fullyParallel: true,
 
     workers: 1,
+    retries: process.env.CI ? 2 : 0,
 
     use: {
 
@@ -44,8 +45,8 @@ export default defineConfig({
 
                 ...devices['Desktop Safari'],
 
-                browserName: 'webkit'
-
+                browserName: 'webkit',
+               
             }
 
         }

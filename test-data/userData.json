@@ -19,7 +19,7 @@
 
     {
     "name": "duplicate-registration",
-    "description": "TC-NEG-01: @ui @smoke duplicate username login",
+    "description": "TC-NEG-03: @ui @smoke duplicate username login",
     "usernameSuffix": "valid",
     "firstName": "Aarohini",
     "lastName": "NA",

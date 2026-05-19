@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 //Attaching all test artifacts (screenshots, videos, traces) to the test report via thiss
- //This ensures they appear in both HTML and Allure reports
+ //This ensures they appear in both HTML and allure reports in jenkins
 base.afterEach(async ({ page }, testInfo: TestInfo) => {
     const testResultsDir = testInfo.outputDir;
     
@@ -40,7 +40,7 @@ base.afterEach(async ({ page }, testInfo: TestInfo) => {
                     });
                 }
                 
-                // Attach error context markdown
+                //attach error context markdown
                 if (file === 'error-context.md') {
                     const content = fs.readFileSync(filePath, 'utf-8');
                     await testInfo.attach('error-context', {
