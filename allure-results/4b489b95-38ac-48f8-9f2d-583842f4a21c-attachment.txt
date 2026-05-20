@@ -1,0 +1,10 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-API-01, TC-API-04, TC-API-05 & TC-API-06: @api Valid GET Account API, validate schema and account type, balance
+[INFO] Sending GET Request for Account ID: 13566
+[API] GET /accounts/13566
+[INFO] Response Body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?><account><id>13566</id><customerId>12434</customerId><type>CHECKING</type><balance>515.50</balance></account>
+[SUCCESS] Status Code Validated: 200
+[SUCCESS] Account ID Validation Passed
+[SUCCESS] Account Type Validation Passed
+[SUCCESS] Schema Validation Passed
+[SUCCESS] Balance Validation Passed

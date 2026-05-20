@@ -11,7 +11,9 @@ test('Validate API Response Time', async ({ request }) => {
 
     const endTime = Date.now();
     const responseTime = endTime - startTime;
-
+    console.log(`Total response Time: ${responseTime} ms`);
+    
+    
     PerformanceHelper.validateApiResponseTime(responseTime);
     expect(response.status()).toBe(200);
 

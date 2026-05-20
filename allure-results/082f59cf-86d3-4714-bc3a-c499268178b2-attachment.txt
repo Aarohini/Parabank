@@ -1,0 +1,5 @@
+[INFO] Accounts API Test Execution Started
+[INFO] Executing Testcase: TC-NEG-API-03: @api Invalid From Account ID
+[INFO] Sending CREATE Account Request for Customer ID: 15320
+[API] POST /createAccount
+[INFO] Customer ID: 15320

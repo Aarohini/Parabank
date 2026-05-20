@@ -4,7 +4,7 @@ export class RegisterPage {
 
     readonly page: Page;
 
-    //Locators
+    //locators
 
     readonly firstName: Locator;
     readonly lastName: Locator;
@@ -26,8 +26,9 @@ export class RegisterPage {
         this.page = page;
 
         //this.firstName = page.getByLabel("First Name");
-         this.firstName = page.getByRole('textbox').nth(2);
+        //  this.firstName = page.getByRole('textbox').nth(2);
 
+        this.firstName =page.locator('#customer\\.firstName');
         this.lastName = page.locator('#customer\\.lastName');
         this.address = page.locator('#customer\\.address\\.street');
         this.city =page.locator('#customer\\.address\\.city');
